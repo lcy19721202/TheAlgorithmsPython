@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
-from types import NoneType
-from typing import Self
+from typing import TypeVar, Any
 
 # Building block classes
+NoneType = type(None)
+
+T = TypeVar('T', bound='Polygon')
 
 
 @dataclass
@@ -191,7 +193,7 @@ class Polygon:
 
     sides: list[Side] = field(default_factory=list)
 
-    def add_side(self, side: Side) -> Self:
+    def add_side(self, side: Side) -> T:
         """
         >>> Polygon().add_side(Side(5))
         Polygon(sides=[Side(length=5, angle=Angle(degrees=90), next_side=None)])
@@ -210,7 +212,7 @@ class Polygon:
         """
         return self.sides[index]
 
-    def set_side(self, index: int, side: Side) -> Self:
+    def set_side(self, index: int, side: Side) -> T:
         """
         >>> Polygon().set_side(0, Side(5))
         Traceback (most recent call last):
