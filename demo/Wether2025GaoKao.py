@@ -29,14 +29,14 @@ fig, ax1 = plt.subplots(figsize=(14, 8))  # 增加图表尺寸
 ax1.grid(True, linestyle='--', alpha=0.7)
 
 # 绘制四日最高温度折线图（红色）
-color = 'tab:red'
+temp_color = 'tab:red'
 ax1.set_xlabel('年份', fontproperties=font)
-ax1.set_ylabel('最高温度℃', fontproperties=font, color=color)
+ax1.set_ylabel('最高温度℃', fontproperties=font, color=temp_color)
 # 历史数据用实线
-line1 = ax1.plot(years[:-1], max_temps[:-1], color=color, marker='o', label='最高温度℃', linewidth=2)
+line1 = ax1.plot(years[:-1], max_temps[:-1], color=temp_color, marker='o', label='最高温度℃', linewidth=2)
 # 预测数据用虚线
-ax1.plot([years[-2], years[-1]], [max_temps[-2], max_temps[-1]], color=color, linestyle='--', marker='o', linewidth=2)
-ax1.tick_params(axis='y', labelcolor=color)
+ax1.plot([years[-2], years[-1]], [max_temps[-2], max_temps[-1]], color=temp_color, linestyle='--', marker='o', linewidth=2)
+ax1.tick_params(axis='y', labelcolor=temp_color)
 ax1.yaxis.set_major_locator(ticker.MultipleLocator(2))
 
 # 设置X轴刻度
@@ -46,24 +46,24 @@ ax1.set_xticklabels([str(year) for year in years], fontproperties=font)
 # 添加温度数据标注
 for x, y in zip(years, max_temps):
     ax1.annotate(f'{y}℃', (x, y), textcoords="offset points", xytext=(0,10), 
-                ha='center', fontproperties=font, color=color, fontsize=8)
+                ha='center', fontproperties=font, color=temp_color, fontsize=8)
 
 # 创建第二个Y轴（湿度，蓝色）
 ax2 = ax1.twinx()
-color = 'tab:blue'
-ax2.set_ylabel('平均湿度% / 平均降水概率%', fontproperties=font, color=color)
+humidity_color = 'tab:blue'
+ax2.set_ylabel('平均湿度% / 平均降水概率%', fontproperties=font, color=humidity_color)
 # 历史数据用实线
-line2 = ax2.plot(years[:-1], avg_humidities[:-1], color=color, marker='s', label='平均湿度%', linewidth=2)
+line2 = ax2.plot(years[:-1], avg_humidities[:-1], color=humidity_color, marker='s', label='平均湿度%', linewidth=2)
 # 预测数据用虚线
-ax2.plot([years[-2], years[-1]], [avg_humidities[-2], avg_humidities[-1]], color=color, linestyle='--', marker='s', linewidth=2)
-ax2.tick_params(axis='y', labelcolor=color)
+ax2.plot([years[-2], years[-1]], [avg_humidities[-2], avg_humidities[-1]], color=humidity_color, linestyle='--', marker='s', linewidth=2)
+ax2.tick_params(axis='y', labelcolor=humidity_color)
 ax2.yaxis.set_major_locator(ticker.MultipleLocator(10))
 ax2.set_ylim(0, 100)  # 设置湿度Y轴范围
 
 # 添加湿度数据标注
 for x, y in zip(years, avg_humidities):
     ax2.annotate(f'{y}%', (x, y), textcoords="offset points", xytext=(0,-15), 
-                ha='center', fontproperties=font, color=color, fontsize=8)
+                ha='center', fontproperties=font, color=humidity_color, fontsize=8)
 
 # 在同一个Y轴上绘制降水概率（绿色）
 color = 'tab:green'
@@ -93,4 +93,5 @@ plt.figtext(0.5, 0.07, '（高考通常安排在每年的6月7日~6月10日的�
 plt.subplots_adjust(bottom=0.25)
 
 # 显示图表
-plt.show()
+if __name__ == '__main__':
+    plt.show()
